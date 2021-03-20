@@ -4,6 +4,7 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import 'fontsource-roboto';
 
 import MainPage from "./panels/MainPage";
+import CalendarPage from "./panels/CalendarPage"
 
 function App() {
 
@@ -24,8 +25,10 @@ function App() {
         <MuiThemeProvider theme={theme}>
             <Switch>
                 <Route exact path="/" render={() => <MainPage/>}/>
+                <Route exact path="/calendar" render={() => <CalendarPage />}/>
 
             </Switch>
+            
         </MuiThemeProvider>
 
     );
