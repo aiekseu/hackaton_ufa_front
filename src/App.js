@@ -6,6 +6,7 @@ import 'fontsource-roboto';
 import MainPage from "./panels/MainPage";
 import CalendarPage from "./panels/CalendarPage"
 
+
 function App() {
 
     const theme = createMuiTheme({
@@ -28,7 +29,7 @@ function App() {
                 <Route exact path="/calendar" render={() => <CalendarPage />}/>
 
             </Switch>
-            
+
         </MuiThemeProvider>
 
     );

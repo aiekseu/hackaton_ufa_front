@@ -6,6 +6,7 @@ import moment from "moment";
 import { changeEvent } from './redux/EventSlice';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss'
 
+
 const localizer = momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(Calendar)

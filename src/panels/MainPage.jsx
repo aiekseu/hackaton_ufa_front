@@ -1,3 +1,4 @@
+import React  from 'react';
 import {Grid} from "@material-ui/core";
 import Header from "../components/Header";
 import Statistic from "../components/Statistic";
