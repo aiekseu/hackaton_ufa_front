@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -8,6 +8,9 @@ import ChipArray from "./ChipArray"
 
 import { useDispatch, useSelector } from 'react-redux';
 import {handleAdd, handleDelete} from './redux/ChipSlice';
+import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import { Typography, Button } from '@material-ui/core';
 
 const employees = [
   {
@@ -16,15 +19,15 @@ const employees = [
 },
 {
   name: "Чимитов Б.Б.",
-  email: "bbc7@tpu.ru"
+  email: ""
 },
 {
   name: "Бесштанникова Л",
-  email: "Simraki@mail.ru"
+  email: "ebb@tpu.ru"
 },
 {
   name: "Кудашкин А.",
-  email: "Simraki@mail.ru"
+  email: "kudashkin@mail.ru"
 },
 {
   name: "Сенчин Д.",
@@ -51,6 +54,22 @@ const currencies = [
     label: '2 часа',
   },
 ];
+
+const BookingButton = withStyles({
+  root: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 18,
+    padding: '6px 12px',
+    border: '0px solid',
+    lineHeight: 1.5,
+    height: 36,
+    width: 224,
+    backgroundColor: '#F6AE3F',
+    borderRadius: "18px 18px 18px 18px",
+    borderColor: '#0063cc',
+  },
+})(Button);
 
 const useStyles = makeStyles((theme) => ({
   roomTitle:{
@@ -109,6 +128,22 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #CACACA",
     color: "#7D86A9",
 
+  },
+  notification: {
+    display: "flex",
+    width: "100%",
+    height: "24px",
+    color: "#7D86A9",
+    paddingLeft: "4px",
+    marginBottom: theme.spacing(2)
+  },
+  buttonDiv: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "center"
+  },
+  bookingButton: {
+    backgroundColor: "#F6AE3F"
   }
 }));
 
@@ -121,6 +156,8 @@ export default function BookingData() {
   const [currency, setCurrency] = React.useState('EUR');
   const [found, setFound] = React.useState(true);
   const [employee, setEmployee] = React.useState(null);
+
+  const [notification, setNotification] = React.useState(true);
 
 
   const getParticipantName = (part) => {
@@ -151,9 +188,15 @@ export default function BookingData() {
     setFound(false);
     setEmployee(null)
   }
-
-  
 }
+
+  const hasEmailMissing = () => {
+    const arr = chipStore.filter((chip) => chip.email.endsWith("tpu.ru"))
+    if (arr){
+      return true
+    }
+    return false
+  }
 
   const onKeyPressAction = (e) =>{
     if(e.key === "Enter"){
@@ -221,6 +264,36 @@ export default function BookingData() {
         </div>
 
         <ChipArray />
+
+
+        <div className={classes.notification} onClick={() => {setNotification(!notification)}}>
+          {notification ? <CheckBoxOutlinedIcon />
+                        :<CheckBoxOutlineBlankOutlinedIcon />}
+          <Typography variant="subtitle1">
+            Оповестить участников
+          </Typography>
+
+        </div>
+
+
+        {notification && hasEmailMissing &&
+          <Typography variant="subtitle1 gutterBottom">
+            Нельзя оповестить Оповестить участников
+          </Typography>
+
+        }
+
+        
+        <div className={classes.buttonDiv}>
+          <BookingButton variant="contained" color="secondary">
+            Забронировать
+          </BookingButton>
+
+        </div>
+
+        
+
+        
 
         
         

@@ -31,7 +31,7 @@ export default function ChipArray() {
   };
 
   return (
-    <Paper component="ul" className={classes.root}>
+    <Paper elevation={0} component="ul" className={classes.root}>
       {chipStore.map((data) => {
         let icon;
 
