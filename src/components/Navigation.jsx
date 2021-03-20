@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,37 +15,21 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import CommentIcon from '@material-ui/icons/Comment';
+import PersonIcon from '@material-ui/icons/Person';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import Header from "./Header";
 import {Badge, Grid, Hidden, Menu, MenuItem} from "@material-ui/core";
-
-import story_1 from '../images/story_1.png'
-import story_2 from '../images/story_2.png'
-import story_3 from '../images/story_3.png'
-
-import RoomsTable from "../components/RoomsTable";
-import Statistic from "../components/Statistic";
-import StoryCard from "../components/StoryCard";
-
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import CommentIcon from "@material-ui/icons/Comment";
-import PersonIcon from "@material-ui/icons/Person";
-import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import PostAddIcon from "@material-ui/icons/PostAdd";
-import FiltersCard from "../components/FiltersCard";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-
-    body: {
-        backgroundColor: '#F1F6FF'
-    },
-    roomsTitle: {
-        marginBottom: 16,
-        marginLeft: 32
-    },
     root: {
         display: 'flex',
     },
@@ -92,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: -drawerWidth,
-        marginTop: 32
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
@@ -135,10 +118,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MainPage() {
+export default function Navigation({open, setOpen}) {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
@@ -149,6 +131,14 @@ export default function MainPage() {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
     };
 
     const menuId = 'primary-account-menu';
@@ -167,18 +157,9 @@ export default function MainPage() {
         </Menu>
     );
 
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
     return (
         <div className={classes.root}>
-            <CssBaseline/>
+            <CssBaseline />
             <AppBar position="fixed"
                     className={clsx(classes.appBar, {
                         [classes.appBarShift]: open,
@@ -263,11 +244,10 @@ export default function MainPage() {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        Меню
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
-                <Divider/>
+                <Divider />
                 <List>
                     <ListItem button key='booking'>
                         <ListItemIcon> <AssessmentIcon/> </ListItemIcon>
@@ -297,45 +277,9 @@ export default function MainPage() {
 
                 </List>
             </Drawer>
-
-
-            {/* TODO: ОТСЮДА НОРМАЛЬНО БЭЛИГ ПРОСТИ */}
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                <Grid container direction="column">
-
-                    <Grid item container direction='row' justify="space-around">
-                        <Grid item xs='auto' sm={8}>
-                            <Statistic/>
-                        </Grid>
-                        <Grid item xs='auto' sm={3}>
-                            <StoryCard picture={story_1} text='Как забронировать комнату'/>
-                            <StoryCard picture={story_2} text='Как забронировать комнату'/>
-                            <StoryCard picture={story_3} text='Как забронировать комнату'/>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item container direction='row' justify="space-around">
-                        <Grid item xs={12} sm={12} md={12} lg={8}>
-                            <Typography variant='h4' className={classes.roomsTitle}>
-                                Переговорные
-                            </Typography>
-                            <RoomsTable/>
-                        </Grid>
-
-                        <Grid item xs={12} sm={12} md={12} lg={3}>
-                            <FiltersCard/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </main>
         </div>
     );
 }
-
 
 
 

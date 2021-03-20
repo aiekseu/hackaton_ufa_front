@@ -9,41 +9,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 
 const useStyles = makeStyles((theme) => ({
-    grow: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        display: 'block',
-    },
-    sectionDesktop: {
-        display: 'flex',
-    },
-    notifications: {
-        paddingRight: 20
-    },
-    divider: {
-        background: '#fafafa',
-    },
-    avatar: {
-        padding: 12,
-        paddingRight: 8
-    },
-    space: {
-        [theme.breakpoints.only('sm')]: {
-            marginRight: 24,
-            marginLeft: 24
-        },
-        [theme.breakpoints.up('md')]: {
-            marginRight: 36,
-            marginLeft: 36
-        },
-    },
-    moreButton: {
-      padding: 4
-    },
+
 }));
 
 const Header = () => {
@@ -117,7 +83,7 @@ const Header = () => {
                             <Hidden xsDown>
                                 <Grid item>
                                     <Typography variant='body1'>
-                                        Мария
+                                        Мария Ким
                                     </Typography>
                                     <Typography variant='body2'>
                                         Admin

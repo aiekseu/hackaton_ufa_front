@@ -17,8 +17,9 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 
 const useStyles = makeStyles((theme) => ({
+
     root: {
-        maxWidth: 300,
+        maxWidth: 800,
         margin: 16,
         padding: 24,
     },
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const FiltersCard = ({setRows}) => {
+const FiltersCard = () => {
     const classes = useStyles();
 
     const [roomType, setRoomType] = useState("")

@@ -1,4 +1,4 @@
-import {GridCoDef} from "@material-ui/data-grid";import {GridRosProp} from "@material-ui/data-grid";
+import {GridRosProp} from "@material-ui/data-grid";
 const roomsData: GridRosProp = [
     {
         id: 1,

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Grid, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 
-import EqualizerIcon from '@material-ui/icons/Equalizer';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import RoomAvailability from "./RoomAvailability";
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +83,7 @@ const Statistic = () => {
             <Grid container direction='column'>
                 <Grid item container direction='row' alignItems="center" className={classes.statNameDiv}>
                     <Grid item>
-                        <EqualizerIcon fontSize='large' className={classes.statIcon}/>
+                        <AssessmentIcon fontSize='large' className={classes.statIcon}/>
                     </Grid>
 
                     <Grid item>
