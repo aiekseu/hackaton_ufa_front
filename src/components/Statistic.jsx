@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 16
     },
     statNameDiv: {
-        marginBottom: 48
+        marginBottom: 32,
+        marginTop: 32
     },
     statDiv: {
         padding: 16
@@ -97,7 +98,7 @@ const Statistic = () => {
                 </Grid>
 
                 <Grid item>
-                    <Paper className={classes.statDiv}>
+                    <Paper className={classes.statDiv} elevation={4}>
                         <Typography variant='h6'>
                             Что тут написать????
                         </Typography>

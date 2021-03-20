@@ -4,6 +4,7 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import 'fontsource-roboto';
 
 import MainPage from "./panels/MainPage";
+import {CssBaseline} from "@material-ui/core";
 
 function App() {
 
@@ -13,18 +14,19 @@ function App() {
                 main: '#1676FF'
             },
             background: {
-                default: '#d9d9d9',
+                default: '#F4F6FF',
                 paper: '#fff'
             }
-        }
+        },
+
     });
 
     return (
 
         <MuiThemeProvider theme={theme}>
+            <CssBaseline />
             <Switch>
-                <Route exact path="/" render={() => <MainPage/>}/>
-
+                <Route exact path="/" render={() => <MainPage />}/>
             </Switch>
         </MuiThemeProvider>
 
