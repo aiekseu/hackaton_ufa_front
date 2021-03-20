@@ -9,8 +9,9 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 'auto',
-        width: '45%',
-        padding: 8,
+        width: '30%',
+        padding: 4,
+        paddingTop: 8,
         margin: 'auto',
         textAlign: 'center'
     },

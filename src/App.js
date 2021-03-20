@@ -13,6 +13,9 @@ function App() {
             primary: {
                 main: '#1676FF'
             },
+            yellow: {
+              main: '#F6AE3F'
+            },
             background: {
                 default: '#F4F6FF',
                 paper: '#fff'
