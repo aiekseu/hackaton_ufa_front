@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {Grid, Paper, Typography} from "@material-ui/core";
+import React from 'react';
+import {Grid, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeRoomFilter, change } from './redux/FilterSlice';
 import RoomDeploymentGraph from './RoomDeploymentGraph';
 import BookingComponent from './BookingComponent';
+
 
 const useStyles = makeStyles((theme) => ({
     roomTitle:{
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const RoomDeployment = () => {
+const RoomDeployment = ({roomN}) => {
     const classes = useStyles();
     const roomFilter = useSelector((state) => (state.roomFilter.room));
     const redEvents = useSelector((state) => (state.eventReducer.events));
@@ -47,7 +48,7 @@ const RoomDeployment = () => {
         <div>
             <div className={classes.roomTitle} onClick={handleChange}>
                 <Typography variant="h5" className={classes.roomTilteTypography}>
-                    Комната {roomFilter > 0 && roomFilter }
+                    Комната {roomFilter > 0 && roomN }
                 </Typography>
             </div>
 

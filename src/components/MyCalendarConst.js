@@ -118,7 +118,7 @@ const MyCalendarConst = () => {
     }
 
     const nextEvents = events.map(existingEvent => {
-      return existingEvent.id == event.id
+      return existingEvent.id === event.id
         ? { ...existingEvent, start, end, allDay }
         : existingEvent
     })
@@ -136,7 +136,7 @@ const MyCalendarConst = () => {
     const events = redEvents
 
     const nextEvents = events.map(existingEvent => {
-      return existingEvent.id == event.id
+      return existingEvent.id === event.id
         ? { ...existingEvent, start, end }
         : existingEvent
     })
@@ -166,8 +166,8 @@ const MyCalendarConst = () => {
   
     const filterEvents = () => {
         //const returnedEvents = roomFilter == 0? state.events : state.events.filter(event => event.room === roomFilter)
-        const returnedEvents = roomFilter == 0? redEvents : redEvents.filter(event => event.room === roomFilter)
-        const personFiltered = personFilter == ""?  returnedEvents: returnedEvents.filter(event => event.participants.includes(personFilter))
+        const returnedEvents = roomFilter === 0? redEvents : redEvents.filter(event => event.room === roomFilter)
+        const personFiltered = personFilter === ""?  returnedEvents: returnedEvents.filter(event => event.participants.includes(personFilter))
         //return personFiltered;
         return freeDays.concat(redEvents)  
     }

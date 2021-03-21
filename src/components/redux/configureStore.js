@@ -1,7 +1,6 @@
 import {
     configureStore,
     combineReducers,
-    getDefaultMiddleware
   } from "@reduxjs/toolkit";
   import filterSlice from "./FilterSlice";
   import eventSlice from "./EventSlice";

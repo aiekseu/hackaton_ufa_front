@@ -38,7 +38,6 @@ import FiltersCard from "../components/FiltersCard";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-
     body: {
         backgroundColor: '#F1F6FF'
     },
@@ -133,6 +132,10 @@ const useStyles = makeStyles((theme) => ({
     moreButton: {
         padding: 4
     },
+    listItems: {
+        marginTop: 24,
+        marginBottom: 24
+    }
 }));
 
 export default function MainPage() {
@@ -268,28 +271,28 @@ export default function MainPage() {
                     </IconButton>
                 </div>
                 <Divider/>
-                <List>
-                    <ListItem button key='booking'>
+                <List >
+                    <ListItem button key='booking' className={classes.listItems}>
                         <ListItemIcon> <AssessmentIcon/> </ListItemIcon>
                         <ListItemText primary='Бронирование'/>
                     </ListItem>
 
-                    <ListItem button key='reviews'>
+                    <ListItem button key='reviews' className={classes.listItems}>
                         <ListItemIcon> <CommentIcon/> </ListItemIcon>
                         <ListItemText primary='Отзывы'/>
                     </ListItem>
 
-                    <ListItem button key='admin'>
+                    <ListItem button key='admin' className={classes.listItems}>
                         <ListItemIcon> <PersonIcon/> </ListItemIcon>
                         <ListItemText primary='Администрация'/>
                     </ListItem>
 
-                    <ListItem button key='support'>
+                    <ListItem button key='support' className={classes.listItems}>
                         <ListItemIcon> <QuestionAnswerIcon/> </ListItemIcon>
                         <ListItemText primary='Техподдержка'/>
                     </ListItem>
 
-                    <ListItem button key='news'>
+                    <ListItem button key='news' className={classes.listItems}>
                         <ListItemIcon> <PostAddIcon/> </ListItemIcon>
                         <ListItemText primary='Новости'/>
                     </ListItem>

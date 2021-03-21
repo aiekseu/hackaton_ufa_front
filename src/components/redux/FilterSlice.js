@@ -8,7 +8,7 @@ const filterSlice = createSlice({
 
     reducers: {
         change: (state) => {
-            return state.room == 4 ? {...state, room: 0}:{...state, room: state.room + 1}},
+            return state.room === 4 ? {...state, room: 0}:{...state, room: state.room + 1}},
         changeRoomFilter: ( state, action ) => {
             const { roomNumber } = action.payload;
             console.log(roomNumber);

@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import {Grid, Paper, Typography} from "@material-ui/core";
+import React  from 'react';
+import { Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import lightGreen from '@material-ui/core/colors/lightGreen';
 import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
 import StockChart from './StockChart';
 import Cubes from "./Cubes"
-import { useDispatch, useSelector } from 'react-redux';
 
 const color = lightGreen["A400"];
 

@@ -1,9 +1,11 @@
+import React from 'react';
 import {DataGrid, GridColDef} from "@material-ui/data-grid";
 import roomsData from "../data/roomsData";
-import {Grid, Paper} from "@material-ui/core";
+import { Paper} from "@material-ui/core";
 import {GridRowParams} from "@material-ui/data-grid";
 import {useState} from "react";
-import FiltersCard from "./FiltersCard";
+
+import history from '../services/history';
 
 const RoomsTable = () => {
 
@@ -25,12 +27,14 @@ const RoomsTable = () => {
         <Paper style={{height: 500, width: '100%'}}>
             <DataGrid
                 rows={rows}
-                rowHeight={35}
+                rowHeight={45}
                 columns={columns}
                 pageSize={10}
                 disableColumnMenu
                 onRowClick={(param: GridRowParams) => {
-                    console.log(param.row.id)
+                    let path = /calendar/ + param.row.col3
+                    let roomN = param.row.col3
+                    history.push(path, roomN)
                 }}
                 onRowHover={(param: GridRowParams) => {
                     //console.log(param.row.id)

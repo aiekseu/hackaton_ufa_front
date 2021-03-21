@@ -2,7 +2,6 @@ import {
     Button,
     MenuItem,
     Grid,
-    Menu,
     Paper,
     Typography,
     FormControl,
@@ -10,10 +9,10 @@ import {
     Select,
     Slider, FormLabel, FormGroup, FormControlLabel, Checkbox
 } from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {useState} from "react";
-
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {makeStyles, withStyles} from "@material-ui/core/styles";
+import { useState } from "react";
+import React from 'react';
+import TextField from "@material-ui/core/TextField";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,16 +27,38 @@ const useStyles = makeStyles((theme) => ({
     },
     inputFilter: {
         width: '100%',
-        backgroundColor: '#F4F6FF',
+        backgroundColor: "#F1F6FF",
+        color: "#7D86A9",
     },
     search: {
         backgroundColor: '#F6AE3F',
         display: 'block',
         marginLeft: 'auto',
-        marginRight: 'auto'
-    }
+        marginRight: 'auto',
+    },
+    textField: {
+        width: "100%",
+        backgroundColor: "#F1F6FF",
+        color: "#7D86A9",
+
+    },
 }));
 
+const BookingButton = withStyles({
+    root: {
+        boxShadow: 'none',
+        textTransform: 'none',
+        fontSize: 18,
+        padding: '6px 12px',
+        border: '0px solid',
+        lineHeight: 1.5,
+        height: 36,
+        width: 224,
+        backgroundColor: '#F6AE3F',
+        borderRadius: "18px 18px 18px 18px",
+        borderColor: '#0063cc',
+    },
+})(Button);
 
 const FiltersCard = () => {
     const classes = useStyles();
@@ -80,45 +101,49 @@ const FiltersCard = () => {
                 </Grid>
 
                 <Grid item>
-                    <FormControl variant="filled" className={classes.inputFilter}>
-                        <InputLabel id="roomType">Тип комнаты</InputLabel>
-                        <Select
-                            labelId="roomType"
-                            id="roomType"
-                            value={roomType}
-                            onChange={(event) => {
-                                setRoomType(event.target.value)
-                            }}
-                        >
-                            <MenuItem value="">
-                                <em>Любой</em>
-                            </MenuItem>
-                            <MenuItem value={'Переговорная'}>Переговорная</MenuItem>
-                            <MenuItem value={'Конференц зал'}>Конференц зал</MenuItem>
-                            <MenuItem value={'Комната групповых занятий'}>Комната групповых занятий</MenuItem>
-                            <MenuItem value={'Комната индивидуальной работы'}>Комната индивидуальной работы</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <TextField
+                        select
+                        label="Тип комнаты"
+                        labelId="roomType"
+                        id="roomType"
+                        value={roomType}
+                        onChange={(event) => {
+                            setRoomType(event.target.value)
+                        }}
+                        variant="outlined"
+                        className={classes.textField}
+                        margin ="dense"
+                    >
+                        <MenuItem value="">
+                            <em>Любой</em>
+                        </MenuItem>
+                        <MenuItem value={'Переговорная'}>Переговорная</MenuItem>
+                        <MenuItem value={'Конференц зал'}>Конференц зал</MenuItem>
+                        <MenuItem value={'Комната групповых занятий'}>Комната групповых занятий</MenuItem>
+                        <MenuItem value={'Комната индивидуальной работы'}>Комната индивидуальной работы</MenuItem>
+                    </TextField>
                 </Grid>
 
                 <Grid item>
-                    <FormControl variant="filled" className={classes.inputFilter}>
-                        <InputLabel id="floor">Этаж</InputLabel>
-                        <Select
-                            labelId="floor"
-                            id="floor"
-                            value={floor}
-                            onChange={(event) => {
-                                setFloor(event.target.value)
-                            }}
-                        >
-                            <MenuItem value="">
-                                <em>Любой</em>
-                            </MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={6}>6</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <TextField
+                        select
+                        label="Этаж"
+                        labelId="floor"
+                        id="floor"
+                        value={floor}
+                        onChange={(event) => {
+                            setFloor(event.target.value)
+                        }}
+                        variant="outlined"
+                        className={classes.textField}
+                        margin ="dense"
+                    >
+                        <MenuItem value="">
+                            <em>Любой</em>
+                        </MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                    </TextField>
                 </Grid>
 
                 <Grid item>
@@ -167,9 +192,9 @@ const FiltersCard = () => {
                 </Grid>
 
                 <Grid item>
-                    <Button variant="contained" className={classes.search}>
+                    <BookingButton className={classes.search}>
                         Поиск
-                    </Button>
+                    </BookingButton>
                 </Grid>
             </Grid>
         </Paper>

@@ -1,13 +1,12 @@
-import React, {useState}from 'react';
+import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import ChipInput from 'material-ui-chip-input'
 import ChipArray from "./ChipArray"
 
 import { useDispatch, useSelector } from 'react-redux';
-import {handleAdd, handleDelete} from './redux/ChipSlice';
+import {handleAdd } from './redux/ChipSlice';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import { Typography, Button } from '@material-ui/core';
@@ -220,7 +219,7 @@ export default function BookingData() {
         console.log(chipStore);
         var arr = chipStore.filter((chip) => chip.email === chipToAdd.email)
         console.log(arr);
-        if (arr.length ==0){
+        if (arr.length === 0){
           dispatch(handleAdd( { chipToAdd }))
         }
         
@@ -316,9 +315,7 @@ export default function BookingData() {
 
         </div>
 
-        
 
-        
 
         
         

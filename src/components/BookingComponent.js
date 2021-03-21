@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
-import {Grid, Card, Paper, Typography, Button, CardMedia} from "@material-ui/core";
+import React from 'react';
+import {Grid, Paper, Typography, Button, CardMedia} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeRoomFilter, change } from './redux/FilterSlice';
-import RoomDeploymentGraph from './RoomDeploymentGraph';
+import { useDispatch } from 'react-redux';
 import img from "../images/office.png"
-import { relativeTimeRounding } from 'moment';
 import BookingData from "./BookingData"
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         margin: 0,
-        height: 0,
         width: "100%",
         height: 200,
         backgroundColor: "#000",
