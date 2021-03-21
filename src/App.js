@@ -13,15 +13,11 @@ function App() {
             primary: {
                 main: '#1676FF'
             },
-            yellow: {
-              main: '#F6AE3F'
-            },
             background: {
                 default: '#F4F6FF',
                 paper: '#fff'
             }
-        },
-
+        }
     });
 
     return (
@@ -29,7 +25,9 @@ function App() {
         <MuiThemeProvider theme={theme}>
             <CssBaseline />
             <Switch>
-                <Route exact path="/" render={() => <MainPage />}/>
+                <Route exact path="/" render={() => <MainPage/>}/>
+                <Route exact path="/calendar" render={() => <CalendarPage />}/>
+
             </Switch>
         </MuiThemeProvider>
 
