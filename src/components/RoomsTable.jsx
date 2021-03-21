@@ -7,9 +7,9 @@ import {useState} from "react";
 
 import history from '../services/history';
 
-const RoomsTable = () => {
+const RoomsTable = ({rows}) => {
 
-    const [rows, setRows] = useState(roomsData)
+
 
     const columns: GridColDef[] = [
         {field: 'col1', headerName: 'Этаж', width: 75},

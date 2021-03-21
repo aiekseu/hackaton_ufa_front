@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -34,6 +34,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import FiltersCard from "../components/FiltersCard";
+import roomsData from "../data/roomsData";
 
 const drawerWidth = 240;
 
@@ -142,6 +143,7 @@ export default function MainPage() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [rows, setRows] = useState(roomsData)
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
@@ -326,11 +328,11 @@ export default function MainPage() {
                             <Typography variant='h4' className={classes.roomsTitle}>
                                 Переговорные
                             </Typography>
-                            <RoomsTable/>
+                            <RoomsTable rows={rows}/>
                         </Grid>
 
                         <Grid item xs={12} sm={12} md={12} lg={3}>
-                            <FiltersCard/>
+                            <FiltersCard setRows={setRows} />
                         </Grid>
                     </Grid>
                 </Grid>

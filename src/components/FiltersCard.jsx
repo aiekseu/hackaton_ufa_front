@@ -10,9 +10,10 @@ import {
     Slider, FormLabel, FormGroup, FormControlLabel, Checkbox
 } from "@material-ui/core";
 import {makeStyles, withStyles} from "@material-ui/core/styles";
-import { useState } from "react";
+import {useState} from "react";
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
+import roomsData from "../data/roomsData";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +61,7 @@ const BookingButton = withStyles({
     },
 })(Button);
 
-const FiltersCard = () => {
+const FiltersCard = ({setRows}) => {
     const classes = useStyles();
 
     const [roomType, setRoomType] = useState("")
@@ -112,7 +113,7 @@ const FiltersCard = () => {
                         }}
                         variant="outlined"
                         className={classes.textField}
-                        margin ="dense"
+                        margin="dense"
                     >
                         <MenuItem value="">
                             <em>Любой</em>
@@ -136,7 +137,7 @@ const FiltersCard = () => {
                         }}
                         variant="outlined"
                         className={classes.textField}
-                        margin ="dense"
+                        margin="dense"
                     >
                         <MenuItem value="">
                             <em>Любой</em>
@@ -192,7 +193,44 @@ const FiltersCard = () => {
                 </Grid>
 
                 <Grid item>
-                    <BookingButton className={classes.search}>
+                    <BookingButton
+                        className={classes.search}
+                        onClick={() => {
+                            let rows = roomsData
+                            let filteredRows = []
+                            let badIndicies = []
+
+                            for (let i = 0; i < rows.length; i++) {
+                                if (floor !== '' && rows[i].col1 !== floor) {
+                                    badIndicies.push(i)
+                                }
+                                if (roomType !== '' && rows[i].col2 !== roomType) {
+                                    badIndicies.push(i)
+                                }
+                                if (rows[i].col9 < peopleRange[0]) {
+                                    badIndicies.push(i)
+                                }
+                                if (facilities.video === true && rows[i].col5 !== '+') {
+                                    badIndicies.push(i)
+                                }
+                                if (facilities.microphone === true && rows[i].col6 !== '+') {
+                                    badIndicies.push(i)
+                                }
+                                if (facilities.wifi === true && rows[i].col7 !== '+') {
+                                    badIndicies.push(i)
+                                }
+                                if (facilities.led === true && rows[i].col8 !== '+') {
+                                    badIndicies.push(i)
+                                }
+                            }
+
+                            for (let i = 0; i < rows.length; i++) {
+                                if (!badIndicies.includes(i)) {
+                                    filteredRows.push(rows[i])
+                                }
+                            }
+                            setRows(filteredRows)
+                        }}>
                         Поиск
                     </BookingButton>
                 </Grid>
