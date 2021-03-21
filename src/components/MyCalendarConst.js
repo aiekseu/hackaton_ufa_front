@@ -152,7 +152,7 @@ const MyCalendarConst = () => {
                           console.log("onClick")
                           //console.log(e.target.event.event)
                           handleChooseEvent(e.target.event)}}
-        eventPropGetter={(event) => { const backgroundColor = event.room === 0 ? "#86C86F" : event.color; return { style: { backgroundColor } }; }}
+        eventPropGetter={(event) => { const backgroundColor = event.room === 0 ? "#86C86F" : "#E38C8C"; return { style: { backgroundColor } }; }}
       />
     )
     }
