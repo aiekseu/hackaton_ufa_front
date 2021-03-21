@@ -50,13 +50,17 @@ const eventSlice = createSlice({
     reducers: {
         changeEvent: ( state, action ) => {
             const { events } = action.payload;
-            console.log(events);
             return {...state, events: events}
+        },
+        addEvent:  ( state, action ) => {
+          const { event } = action.payload;
+          console.log(event);
+          state.events.push(event)
         }
     }
 });
 
 
-export const {changeEvent} = eventSlice.actions;
+export const {changeEvent, addEvent} = eventSlice.actions;
 
 export default eventSlice.reducer

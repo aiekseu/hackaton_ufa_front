@@ -140,10 +140,19 @@ const useStyles = makeStyles((theme) => ({
   buttonDiv: {
     display: "flex",
     width: "100%",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   bookingButton: {
     backgroundColor: "#F6AE3F"
+  },
+  typographyWarning: {
+    color: "#EA4E4E"
+  },
+  typographyWarningDiv:{
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    marginBottom: "24px"
   }
 }));
 
@@ -152,9 +161,10 @@ export default function BookingData() {
   const count = useSelector((state) => (state.chipReducer.count));
   const dispatch = useDispatch();
 
+  const [missingEmails, setMissingEmails] = React.useState([]);
   const classes = useStyles();
   const [currency, setCurrency] = React.useState('EUR');
-  const [found, setFound] = React.useState(true);
+  const [found, setFound] = React.useState(false);
   const [employee, setEmployee] = React.useState(null);
 
   const [notification, setNotification] = React.useState(true);
@@ -191,8 +201,11 @@ export default function BookingData() {
 }
 
   const hasEmailMissing = () => {
-    const arr = chipStore.filter((chip) => chip.email.endsWith("tpu.ru"))
-    if (arr){
+    const arr = chipStore.filter((chip) => chip.email === "")
+    console.log("arr");
+    console.log(arr);
+    //setMissingEmails(arr)
+    if (arr.length > 0){
       return true
     }
     return false
@@ -203,7 +216,7 @@ export default function BookingData() {
       console.log("enter");
       
       if (found){
-        const chipToAdd = {key: count, email: employee.email }
+        const chipToAdd = {key: count, name: employee.name, email: employee.email }
         console.log(chipStore);
         var arr = chipStore.filter((chip) => chip.email === chipToAdd.email)
         console.log(arr);
@@ -218,6 +231,15 @@ export default function BookingData() {
         e.target.value = ""
     }
 
+  }
+
+ 
+
+  const handleBooking = () => {
+    const event = {
+      id: count,
+      start: new Date()
+    }
   }
 
   return (
@@ -276,16 +298,19 @@ export default function BookingData() {
         </div>
 
 
-        {notification && hasEmailMissing &&
-          <Typography variant="subtitle1 gutterBottom">
-            Нельзя оповестить Оповестить участников
-          </Typography>
+        <div className={classes.typographyWarningDiv}>
+        {notification && hasEmailMissing() &&
+          <Typography className={classes.typographyWarning} variant="subtitle1 gutterBottom">
+          Невозможно оповестить {chipStore.filter((chip) => chip.email === "")[0].name} (отсутствует почта)
+        </Typography>}
+          
 
-        }
+        </div>
+        
 
         
         <div className={classes.buttonDiv}>
-          <BookingButton variant="contained" color="secondary">
+          <BookingButton variant="contained" color="secondary" onClick={handleBooking}>
             Забронировать
           </BookingButton>
 

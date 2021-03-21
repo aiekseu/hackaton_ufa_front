@@ -21,6 +21,29 @@ const MyCalendarConst = () => {
     const handleChangeEvents = (newEvents) => {
         dispatch(changeEvent({events: newEvents}))
     }
+    
+    function daysInMonth (month, year) {
+      return new Date(year, month+1, 0).getDate();
+  }
+  
+
+    const month = new Date().getMonth();
+    const year = new Date().getYear()
+
+    const days = daysInMonth(month, 2021)
+    const freeDays = []
+
+    for(var d in [...Array(days).keys()]){
+      var day = d
+      freeDays.push({
+        id: day,
+        start: new Date(2021, month, day),
+        end: new Date(2021, month, day),
+        title: "Свободно",
+        room: 0})
+
+    }
+    console.log(freeDays);
 
     /*const [state, setState] = useState({
         events: [
@@ -128,25 +151,25 @@ const MyCalendarConst = () => {
   }
 
   const newEvent = (_event) => {}
-    // let idList = this.state.events.map(a => a.id)
-    // let newId = Math.max(...idList) + 1
-    // let hour = {
-    //   id: newId,
-    //   title: 'New Event',
-    //   allDay: event.slots.length == 1,
-    //   start: event.start,
-    //   end: event.end,
-    // }
-    // this.setState({
-    //   events: this.state.events.concat([hour]),
-    // })
+
+
+
+    const combineEvents = () => {
+      freeDays.concat(redEvents)
+      for(var i=0; i<freeDays.length; i++){
+        if(redEvents){
+
+        }
+      }
+    }
 
   
     const filterEvents = () => {
         //const returnedEvents = roomFilter == 0? state.events : state.events.filter(event => event.room === roomFilter)
         const returnedEvents = roomFilter == 0? redEvents : redEvents.filter(event => event.room === roomFilter)
         const personFiltered = personFilter == ""?  returnedEvents: returnedEvents.filter(event => event.participants.includes(personFilter))
-        return personFiltered;
+        //return personFiltered;
+        return freeDays.concat(redEvents)  
     }
 
     return (
@@ -168,6 +191,8 @@ const MyCalendarConst = () => {
         onDropFromOutside={onDropFromOutside}
         handleDragStart={handleDragStart}
         style={{ height: "100vh" }}
+        onClick={(e) => {console.log(e.target)}}
+        eventPropGetter={(event) => { const backgroundColor = event.room === 0 ? "#86C86F" : event.color; return { style: { backgroundColor } }; }}
       />
     )
     }
