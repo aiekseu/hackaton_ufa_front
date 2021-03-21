@@ -3,7 +3,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Filters from "../components/Filters";
 import MyCalendarConst from "../components/MyCalendarConst";
 import PersonFilters from "../components/PersonFilters";
-import RoomDeployment from "../components/RoomDeployment"
+import RoomDeployment from "../components/DeploymentGraph/RoomDeployment"
 import {makeStyles} from '@material-ui/core/styles';
 import {Grid} from "@material-ui/core";
 import Header from "../components/Header";

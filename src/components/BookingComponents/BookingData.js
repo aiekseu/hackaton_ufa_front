@@ -2,12 +2,12 @@ import React, {useState}from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import ChipInput from 'material-ui-chip-input'
 import ChipArray from "./ChipArray"
 
+import {addEvent} from '../redux/EventSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import {handleAdd, handleDelete} from './redux/ChipSlice';
+import {handleAdd, handleDelete} from '../redux/ChipSlice';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import { Typography, Button } from '@material-ui/core';
@@ -158,8 +158,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BookingData() {  
   const chipStore = useSelector((state) => (state.chipReducer.chips));
+  
   const count = useSelector((state) => (state.chipReducer.count));
   const dispatch = useDispatch();
+  const chosenEvent = useSelector((state) => (state.eventReducer.chosenEvent));
 
   const [missingEmails, setMissingEmails] = React.useState([]);
   const classes = useStyles();
@@ -233,13 +235,28 @@ export default function BookingData() {
 
   }
 
- 
-
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  
+  
   const handleBooking = () => {
+    var participantEmails = []
+    chipStore.forEach(chip => {participantEmails.push(chip.email)})
+    console.log("inside booking");
+    console.log(chosenEvent);
+
     const event = {
-      id: count,
-      start: new Date()
+      id: getRandomInt(300),
+      start: chosenEvent.start,
+      end: chosenEvent.end,
+      title: "Title",
+      participants: participantEmails,
+      room: 1,
+      data: [[0, 3], [1, 4], [2, 6], [3, 5], [4, 5]]
     }
+
+    dispatch(addEvent({event: event}))
   }
 
   return (

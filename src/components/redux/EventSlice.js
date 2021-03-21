@@ -4,6 +4,7 @@ import moment from "moment";
 const eventSlice = createSlice({
     name: "counter",
     initialState: {
+        chosenEvent: {},
         events: [
             {   
                 id: 0,
@@ -48,12 +49,19 @@ const eventSlice = createSlice({
     },
 
     reducers: {
+        changeChosenEvent: ( state, action ) => {
+          const { freeEvent } = action.payload;
+          console.log("Free event");
+          console.log(freeEvent);
+          return {...state, chosenEvent: freeEvent}
+      },
         changeEvent: ( state, action ) => {
             const { events } = action.payload;
             return {...state, events: events}
         },
         addEvent:  ( state, action ) => {
           const { event } = action.payload;
+          console.log("edding a free avent");
           console.log(event);
           state.events.push(event)
         }
@@ -61,6 +69,6 @@ const eventSlice = createSlice({
 });
 
 
-export const {changeEvent, addEvent} = eventSlice.actions;
+export const {changeEvent, addEvent, changeChosenEvent} = eventSlice.actions;
 
 export default eventSlice.reducer

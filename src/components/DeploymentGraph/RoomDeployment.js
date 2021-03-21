@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Grid, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeRoomFilter, change } from './redux/FilterSlice';
+import { changeRoomFilter, change } from '../redux/FilterSlice';
 import RoomDeploymentGraph from './RoomDeploymentGraph';
-import BookingComponent from './BookingComponent';
+import BookingComponent from '../BookingComponents/BookingComponent';
 
 const useStyles = makeStyles((theme) => ({
     roomTitle:{
@@ -53,8 +53,8 @@ const RoomDeployment = () => {
 
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    {roomFilter > 0 &&
-                    <RoomDeploymentGraph fetchedData={redEvents.filter(event => event.room === roomFilter)[0]}/>}
+                    {/*roomFilter > 0 &&
+                    <RoomDeploymentGraph fetchedData={redEvents.filter(event => event.room === roomFilter)[0]}/>*/}
                 </Grid>
 
                 <Grid item xs={12}>

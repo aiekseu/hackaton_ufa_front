@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import TagFacesIcon from '@material-ui/icons/TagFaces';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {handleAdd, handleDelete} from './redux/ChipSlice';
+import {handleAdd, handleDelete} from '../redux/ChipSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {

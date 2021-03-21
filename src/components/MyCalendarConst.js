@@ -3,8 +3,9 @@ import { Calendar, Views, momentLocalizer} from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment";
-import { changeEvent } from './redux/EventSlice';
+import { changeEvent, changeChosenEvent} from './redux/EventSlice';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss'
+import { handleDelete } from './redux/ChipSlice';
 
 
 const localizer = momentLocalizer(moment);
@@ -21,61 +22,7 @@ const MyCalendarConst = () => {
     const handleChangeEvents = (newEvents) => {
         dispatch(changeEvent({events: newEvents}))
     }
-    
-    function daysInMonth (month, year) {
-      return new Date(year, month+1, 0).getDate();
-  }
-  
-
-    const month = new Date().getMonth();
-    const year = new Date().getYear()
-
-    const days = daysInMonth(month, 2021)
-    const freeDays = []
-
-    for(var d in [...Array(days).keys()]){
-      var day = d
-      freeDays.push({
-        id: day,
-        start: new Date(2021, month, day),
-        end: new Date(2021, month, day),
-        title: "Свободно",
-        room: 0})
-
-    }
-    console.log(freeDays);
-
-    /*const [state, setState] = useState({
-        events: [
-            {   
-                id: 0,
-                allDay: true,
-                start: moment().toDate(),
-                end: moment()
-                  .add(1, "days")
-                  .toDate(),
-                title: "Комната 1",
-                room: 1
-              },
-              {
-                id: 1,
-                allDay: true,
-                start: new Date(2021, 2, 22),
-                end: new Date(2021, 2, 23),
-                title: "Комната 2",
-                room: 2
-              },
-              {
-                id: 2,
-                allDay: true,
-                start: new Date(2021, 2, 25),
-                end: new Date(2021, 2, 26),
-                title: "Комната 3",
-                room: 3
-              }
-        ],
-        displayDragItemInCell: true,
-      })*/
+ 
       const [state, setState] = useState({
         displayDragItemInCell: true,
       })
@@ -124,11 +71,7 @@ const MyCalendarConst = () => {
     })
 
     handleChangeEvents(nextEvents);
-    /*setState({
-      events: nextEvents,
-    })0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 Разкомментировать если нужно*/
 
-    // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
   }
 
   const resizeEvent = ({ event, start, end }) => {
@@ -142,34 +85,45 @@ const MyCalendarConst = () => {
     })
 
     handleChangeEvents(nextEvents);
+  }
 
-    /*setState({
-      events: nextEvents,
-    })0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 Разкомментировать если нужно*/
-
-    //alert(`${event.title} was resized to ${start}-${end}`)
+  const handleChooseEvent = (newEvent) => {
+    console.log("received obj");
+    console.log(newEvent);
+    var arr = redEvents.filter(event => isbetweenDates(event, newEvent.start) )
+    if( arr.length == 0) {
+      dispatch(changeChosenEvent({freeEvent: newEvent}))
+    } else{
+      console.log("занято")
+    }
+    
   }
 
   const newEvent = (_event) => {}
 
+    const isbetweenDates = (event, dt) => {
+      return (event.end.getDate() >= dt.getDate()) && (event.start.getDate() <= dt.getDate()) && (event.end.getMonth() >= dt.getMonth()) && (event.start.getMonth() <= dt.getMonth())  || (event.end >= dt && event.start <= dt)
 
-
-    const combineEvents = () => {
-      freeDays.concat(redEvents)
-      for(var i=0; i<freeDays.length; i++){
-        if(redEvents){
-
-        }
-      }
     }
-
-  
+ 
     const filterEvents = () => {
-        //const returnedEvents = roomFilter == 0? state.events : state.events.filter(event => event.room === roomFilter)
-        const returnedEvents = roomFilter == 0? redEvents : redEvents.filter(event => event.room === roomFilter)
-        const personFiltered = personFilter == ""?  returnedEvents: returnedEvents.filter(event => event.participants.includes(personFilter))
-        //return personFiltered;
-        return freeDays.concat(redEvents)  
+      var freeDays = [];
+        //const returnedEvents = roomFilter == 0? redEvents : redEvents.filter(event => event.room === roomFilter)
+//        const personFiltered = personFilter == ""?  returnedEvents: returnedEvents.filter(event => event.participants.includes(personFilter))
+      
+        for(var dt = new Date(); dt <= new Date(2021, 4, 30); dt.setDate(dt.getDate()+1)) {
+          var arr = redEvents.filter(event => isbetweenDates(event, dt) )
+          if( arr.length == 0) {
+            freeDays.push({
+              id: dt.getDate(),
+              allDay: true,
+              start:new Date(dt),
+              end: new Date(dt),
+              title: "Свободно",
+              room: 0});
+        }}
+        return freeDays.concat(redEvents);
+   
     }
 
     return (
@@ -182,7 +136,10 @@ const MyCalendarConst = () => {
         resizable
         onEventResize={resizeEvent}
         onSelectSlot={newEvent}
-        onDragStart={console.log}
+        onDragStart={ e => {
+          console.log("Clicked!")
+          //console.log(e.target.event.event)
+          handleChooseEvent(e.event)}}
         defaultView={Views.MONTH}
         popup={true}
         dragFromOutsideItem={
@@ -191,7 +148,10 @@ const MyCalendarConst = () => {
         onDropFromOutside={onDropFromOutside}
         handleDragStart={handleDragStart}
         style={{ height: "100vh" }}
-        onClick={(e) => {console.log(e.target)}}
+        onClick={(e) => {
+                          console.log("onClick")
+                          //console.log(e.target.event.event)
+                          handleChooseEvent(e.target.event)}}
         eventPropGetter={(event) => { const backgroundColor = event.room === 0 ? "#86C86F" : event.color; return { style: { backgroundColor } }; }}
       />
     )

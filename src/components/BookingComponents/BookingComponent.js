@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Grid, Card, Paper, Typography, Button, CardMedia} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeRoomFilter, change } from './redux/FilterSlice';
-import RoomDeploymentGraph from './RoomDeploymentGraph';
-import img from "../images/office.png"
+import { changeRoomFilter, change } from '../redux/FilterSlice';
+import RoomDeploymentGraph from '../DeploymentGraph/RoomDeploymentGraph';
+import img from "../../images/office.png"
 import { relativeTimeRounding } from 'moment';
 import BookingData from "./BookingData"
 
